@@ -44,7 +44,6 @@ Output: false
 ```
 
 **Constraints:**
-
  - 1 <= s.length <= 20
  - 1 <= p.length <= 30
  - s contains only lowercase English letters.
