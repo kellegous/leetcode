@@ -27,8 +27,8 @@ func TestSolution(t *testing.T) {
 				"Preorder: %v, Inorder: %v, Expected: %s, Got: %s",
 				test.Preorder,
 				test.Inorder,
-				got.String(),
-				test.Expected.String())
+				test.Expected.String(),
+				got.String())
 		}
 	}
 }
