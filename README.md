@@ -4,13 +4,17 @@ What is it about these type of micro-algorithm problems? They're quite fun in th
 
 But I digress. They're fun and in this repository, I will on occassionally solve one or two problems.
 
-## Run all tests
+## Go
+
+Versions written in Go are located in the `go` directory, so all of these commands should be run from there.
+
+### Run all tests
 
 ```console
 % go test ./...
 ```
 
-## Run a specific test
+### Run a specific test
 
 ```console
 % go test ./p0001
