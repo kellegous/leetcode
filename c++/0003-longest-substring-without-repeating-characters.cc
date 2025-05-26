@@ -1,9 +1,11 @@
 #include <gtest/gtest.h>
 
-#include <string>
+#include <string_view>
+#include <unordered_map>
 
 namespace longestSubstringWithoutRepeatingCharacters {
-int solve(const std::string& s) {
+
+int solve(const std::string_view& s) {
   if (s.empty()) {
     return 0;
   }
@@ -29,6 +31,7 @@ int solve(const std::string& s) {
 
   return max_len;
 }
+
 }  // namespace longestSubstringWithoutRepeatingCharacters
 
 TEST(LongestSubstringWithoutRepeatingCharacters, TestCases) {
