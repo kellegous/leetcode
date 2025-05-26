@@ -1,4 +1,6 @@
-OBJS := 0001-two-sum.o 0002-add-two-numbers.o
+OBJS := 0001-two-sum.o \
+	0002-add-two-numbers.o \
+	0003-longest-substring-without-repeating-characters.o
 
 all: leetcode_tests
 
