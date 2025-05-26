@@ -1,10 +1,10 @@
+#include <gtest/gtest.h>
+
 #include <cassert>
 #include <initializer_list>
 #include <memory>
 #include <string>
 #include <utility>
-
-#include <gtest/gtest.h>
 
 namespace addTwoNumbers {
 
@@ -16,19 +16,35 @@ struct ListNode {
   ListNode(int x, std::unique_ptr<ListNode> next)
       : val(x), next(std::move(next)) {}
 
-  [[nodiscard]] static std::unique_ptr<ListNode>
-  create(const std::initializer_list<int> xs) {
+  [[nodiscard]] static std::unique_ptr<ListNode> create(
+      const std::initializer_list<int> xs
+  ) {
     return create(xs.begin(), xs.end());
   }
 
-  [[nodiscard]] static std::unique_ptr<ListNode>
-  add(const std::unique_ptr<ListNode> &l1, const std::unique_ptr<ListNode> &l2,
-      int carry) {
-    std::unique_ptr<ListNode> dummy = std::make_unique<ListNode>(0);
-    ListNode *current = dummy.get();
+  [[nodiscard]] static std::unique_ptr<ListNode> add(
+      const std::unique_ptr<ListNode>& l1, const std::unique_ptr<ListNode>& l2,
+      int carry
+  ) {
+    if (!l1 && !l2) {
+      return nullptr;
+    }
 
-    const ListNode *p1 = l1.get();
-    const ListNode *p2 = l2.get();
+    auto value = carry;
+    const ListNode* p1 = nullptr;
+    const ListNode* p2 = nullptr;
+    if (l1) {
+      value += l1->val;
+      p1 = l1->next.get();
+    }
+    if (l2) {
+      value += l2->val;
+      p2 = l2->next.get();
+    }
+    std::unique_ptr<ListNode> root = std::make_unique<ListNode>(value % 10);
+    carry = value / 10;
+
+    ListNode* current = root.get();
 
     while (p1 || p2 || carry) {
       int sum = carry;
@@ -46,22 +62,26 @@ struct ListNode {
       current = current->next.get();
     }
 
-    return std::move(dummy->next);
+    return std::move(root);
   }
 
-  [[nodiscard]] std::vector<int> values() const {
-    std::vector<int> xs;
-    const ListNode *curr = this;
-    while (curr != nullptr) {
-      xs.push_back(curr->val);
-      curr = curr->next.get();
+  static bool Equal(const ListNode* l1, const ListNode* l2) {
+    while (l1 || l2) {
+      if (!l1 || !l2) {
+        return false;
+      }
+      if (l1->val != l2->val) {
+        return false;
+      }
+      l1 = l1->next.get();
+      l2 = l2->next.get();
     }
-    return xs;
+    return true;
   }
 
   [[nodiscard]] std::string ToString() const {
     std::string str;
-    const ListNode *curr = this;
+    const ListNode* curr = this;
     while (curr != nullptr) {
       if (!str.empty()) {
         str.append(" -> ");
@@ -72,10 +92,11 @@ struct ListNode {
     return str;
   }
 
-private:
-  [[nodiscard]] static std::unique_ptr<ListNode>
-  create(std::initializer_list<int>::const_iterator head,
-         std::initializer_list<int>::const_iterator tail) {
+ private:
+  [[nodiscard]] static std::unique_ptr<ListNode> create(
+      std::initializer_list<int>::const_iterator head,
+      std::initializer_list<int>::const_iterator tail
+  ) {
     if (head == tail) {
       return nullptr;
     }
@@ -83,26 +104,36 @@ private:
   }
 };
 
-[[nodiscard]] std::unique_ptr<ListNode>
-solve(const std::unique_ptr<ListNode> &l1,
-      const std::unique_ptr<ListNode> &l2) {
+[[nodiscard]] std::unique_ptr<ListNode> solve(
+    const std::unique_ptr<ListNode>& l1, const std::unique_ptr<ListNode>& l2
+) {
   return ListNode::add(l1, l2, 0);
 }
 
-} // namespace addTwoNumbers
+}  // namespace addTwoNumbers
 
 using addTwoNumbers::ListNode;
 
 TEST(addTwoNumbers, TestCases) {
-  EXPECT_EQ(addTwoNumbers::solve(ListNode::create({2, 4, 3}),
-                                 ListNode::create({5, 6, 4}))
-                ->values(),
-            (std::vector<int>{7, 0, 8}));
-  EXPECT_EQ(addTwoNumbers::solve(ListNode::create({0}), ListNode::create({0}))
-                ->values(),
-            (std::vector<int>{0}));
-  EXPECT_EQ(addTwoNumbers::solve(ListNode::create({9, 9, 9, 9, 9, 9, 9}),
-                                 ListNode::create({9, 9, 9, 9}))
-                ->values(),
-            (std::vector<int>{8, 9, 9, 9, 0, 0, 0, 1}));
+  EXPECT_TRUE(ListNode::Equal(
+      addTwoNumbers::solve(
+          ListNode::create({2, 4, 3}), ListNode::create({5, 6, 4})
+      )
+          .get(),
+      ListNode::create({7, 0, 8}).get()
+  ));
+
+  EXPECT_TRUE(ListNode::Equal(
+      addTwoNumbers::solve(ListNode::create({0}), ListNode::create({0})).get(),
+      ListNode::create({0}).get()
+  ));
+
+  EXPECT_TRUE(ListNode::Equal(
+      addTwoNumbers::solve(
+          ListNode::create({9, 9, 9, 9, 9, 9, 9}),
+          ListNode::create({9, 9, 9, 9})
+      )
+          .get(),
+      ListNode::create({8, 9, 9, 9, 0, 0, 0, 1}).get()
+  ));
 }

@@ -1,2 +1,4 @@
 /*.o
 /leetcode_tests
+/.clangd
+/.vscode
