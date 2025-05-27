@@ -24,19 +24,19 @@ std::string solve(const std::string_view& s) {
 
   for (int i = 0; i < s.length(); ++i) {
     // Check for odd length palindromes
-    auto [left1, right1] = expand_around_center(i, i);
-    int len1 = right1 - left1 + 1;
+    auto [l1, r1] = expand_around_center(i, i);
+    int len1 = r1 - l1 + 1;
     if (len1 > max_len) {
       max_len = len1;
-      start = left1;
+      start = l1;
     }
 
     // Check for even length palindromes
-    auto [left2, right2] = expand_around_center(i, i + 1);
-    int len2 = right2 - left2 + 1;
+    auto [l2, r2] = expand_around_center(i, i + 1);
+    int len2 = r2 - l2 + 1;
     if (len2 > max_len) {
       max_len = len2;
-      start = left2;
+      start = l2;
     }
   }
 
