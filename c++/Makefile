@@ -1,7 +1,8 @@
 OBJS := 0001-two-sum.o \
 	0002-add-two-numbers.o \
 	0003-longest-substring-without-repeating-characters.o \
-	0004-median-of-two-sorted-arrays.o
+	0004-median-of-two-sorted-arrays.o \
+	0005-longest-palindromic-substring.o
 
 all: leetcode_tests
 

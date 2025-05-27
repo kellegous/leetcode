@@ -1,0 +1,54 @@
+#include <gtest/gtest.h>
+
+#include <string>
+#include <string_view>
+
+namespace longestPalindromicSubstring {
+
+std::string solve(const std::string_view& s) {
+  if (s.empty()) {
+    return "";
+  }
+
+  int start = 0;
+  int max_len = 1;
+
+  // Helper function to expand around center
+  auto expand_around_center = [&s](int left, int right) -> std::pair<int, int> {
+    while (left >= 0 && right < s.length() && s[left] == s[right]) {
+      left--;
+      right++;
+    }
+    return {left + 1, right - 1};
+  };
+
+  for (int i = 0; i < s.length(); ++i) {
+    // Check for odd length palindromes
+    auto [left1, right1] = expand_around_center(i, i);
+    int len1 = right1 - left1 + 1;
+    if (len1 > max_len) {
+      max_len = len1;
+      start = left1;
+    }
+
+    // Check for even length palindromes
+    auto [left2, right2] = expand_around_center(i, i + 1);
+    int len2 = right2 - left2 + 1;
+    if (len2 > max_len) {
+      max_len = len2;
+      start = left2;
+    }
+  }
+
+  return std::string(s.substr(start, max_len));
+}
+
+}  // namespace longestPalindromicSubstring
+
+TEST(LongestPalindromicSubstring, TestCases) {
+  EXPECT_EQ(longestPalindromicSubstring::solve("babad"), "bab");
+  EXPECT_EQ(longestPalindromicSubstring::solve("cbbd"), "bb");
+
+  EXPECT_EQ(longestPalindromicSubstring::solve("a"), "a");
+  EXPECT_EQ(longestPalindromicSubstring::solve(""), "");
+}
