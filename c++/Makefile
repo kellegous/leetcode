@@ -3,7 +3,8 @@ OBJS := 0001-two-sum.o \
 	0003-longest-substring-without-repeating-characters.o \
 	0004-median-of-two-sorted-arrays.o \
 	0005-longest-palindromic-substring.o \
-	0006-zigzag-conversion.o
+	0006-zigzag-conversion.o \
+	0007-reverse-integer.o
 
 all: leetcode_tests
 
