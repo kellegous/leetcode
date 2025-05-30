@@ -5,7 +5,8 @@ OBJS := 0001-two-sum.o \
 	0005-longest-palindromic-substring.o \
 	0006-zigzag-conversion.o \
 	0007-reverse-integer.o \
-	0008-string-to-integer-atoi.o
+	0008-string-to-integer-atoi.o \
+	0009-palindrome-number.o
 
 all: leetcode_tests
 
