@@ -7,7 +7,8 @@ OBJS := 0001-two-sum.o \
 	0007-reverse-integer.o \
 	0008-string-to-integer-atoi.o \
 	0009-palindrome-number.o \
-	0010-regular-expression-matching.o
+	0010-regular-expression-matching.o \
+	0011-container-with-most-water.o
 
 all: leetcode_tests
 
