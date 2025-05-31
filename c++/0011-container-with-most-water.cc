@@ -1,5 +1,8 @@
 #include <gtest/gtest.h>
 
+#include <algorithm>
+#include <vector>
+
 namespace containerWithMostWater {
 
 int solve(const std::vector<int>& height) {
