@@ -9,7 +9,8 @@ OBJS := 0001-two-sum.o \
 	0009-palindrome-number.o \
 	0010-regular-expression-matching.o \
 	0011-container-with-most-water.o \
-	0012-integer-to-roman.o
+	0012-integer-to-roman.o \
+	0013-roman-to-integer.o
 
 all: leetcode_tests
 
