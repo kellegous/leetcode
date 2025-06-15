@@ -1,8 +1,8 @@
+#include <gtest/gtest.h>
+
 #include <cassert>
 #include <unordered_map>
 #include <vector>
-
-#include <gtest/gtest.h>
 
 namespace twoSum {
 
@@ -19,7 +19,7 @@ std::vector<int> solve(const std::vector<int> &nums, int target) {
   assert(false);
 }
 
-} // namespace twoSum
+}  // namespace twoSum
 
 TEST(TwoSum, TestCases) {
   EXPECT_EQ(twoSum::solve({2, 7, 11, 15}, 9), (std::vector<int>{0, 1}));

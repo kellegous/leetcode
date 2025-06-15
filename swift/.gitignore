@@ -16,3 +16,4 @@ DerivedData/
 *.swiftdoc
 *.swiftmodule
 *.swiftsourceinfo 
+/.swiftpm/

@@ -3,21 +3,21 @@
 import PackageDescription
 
 let package = Package(
-    name: "LeetCodeSwift",
+    name: "LeetCode",
     platforms: [
         .macOS(.v10_15)
     ],
     products: [
         .library(
-            name: "LeetCodeSwift",
-            targets: ["LeetCodeSwift"]),
+            name: "LeetCode",
+            targets: ["LeetCode"]),
     ],
     targets: [
         .target(
-            name: "LeetCodeSwift",
+            name: "LeetCode",
             dependencies: []),
         .testTarget(
-            name: "LeetCodeSwiftTests",
-            dependencies: ["LeetCodeSwift"]),
+            name: "LeetCodeTests",
+            dependencies: ["LeetCode"]),
     ]
 ) 
