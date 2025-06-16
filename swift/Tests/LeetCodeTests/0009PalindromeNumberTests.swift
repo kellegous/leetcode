@@ -1,7 +1,7 @@
 import Testing
 import LeetCode
 
-@Test("Test Palindrome Number", arguments: [
+@Test("Test PalindromeNumber", arguments: [
     (121, true),
     (-121, false),
     (10, false),
